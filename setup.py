@@ -11,7 +11,7 @@ setup(
     author_email='leeyiw@gmail.com',
     url='https://github.com/leeyiw/dnspod',
     packages=['dnspod'],
-    requires=['requests (>=2.0.0)'],
+    requires=['requests'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
