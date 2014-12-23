@@ -44,7 +44,7 @@ class RecordAPI(object):
 
     def ddns(self, domain_id, record_id, sub_domain, record_line, value):
         '''
-        Update record dynamicly
+        Update record dynamically
         '''
         record = self.info(domain_id, record_id)
         # If everything stay the same, no need to update
