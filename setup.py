@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
-from distutils.core import setup
+from distutils.util import convert_path
+from setuptools import setup
+
+execfile(convert_path('dnspod/version.py'))
 
 setup(
     name='dnspod',
-    version='0.1',
+    version=__version__,
     description='a Python library for DNSPod OpenAPI',
     author='Yiwei Li',
     author_email='leeyiw@gmail.com',
+    license='Apache',
     url='https://github.com/leeyiw/dnspod',
     packages=['dnspod'],
-    requires=['requests'],
+    install_requires=['requests'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
