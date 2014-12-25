@@ -7,7 +7,10 @@ from info import InfoAPI
 
 class BaseAPI(object):
     '''
-    DNSPod base API object.
+    BaseAPI is used by every other API objects.
+
+    BaseAPI hold informations that will used by other API objects during every
+    API operation.
     '''
 
     LANG_EN = 'en'
@@ -16,6 +19,11 @@ class BaseAPI(object):
     DEFAULT_API_URL = 'https://dnsapi.cn/'
 
     def __init__(self, login_email, login_password, **kwargs):
+        '''
+        Initialize object with DNSPod account and options
+
+        :Parameters:
+        '''
         self.login_email = login_email
         self.login_password = login_password
         self.format = 'json'
