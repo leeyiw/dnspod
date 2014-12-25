@@ -3,11 +3,8 @@
 
 import requests
 
-from info import InfoAPI
-
 class BaseAPI(object):
-    '''
-    BaseAPI is used by every other API objects.
+    '''BaseAPI is used by every other API objects.
 
     BaseAPI hold informations that will used by other API objects during every
     API operation.
@@ -15,20 +12,22 @@ class BaseAPI(object):
 
     LANG_EN = 'en'
     LANG_CN = 'cn'
-    DEFAULT_LANG = LANG_EN
     DEFAULT_API_URL = 'https://dnsapi.cn/'
 
-    def __init__(self, login_email, login_password, **kwargs):
-        '''
-        Initialize object with DNSPod account and options
+    def __init__(self, login_email, login_password, lang=LANG_EN, api_url=DEFAULT_API_URL):
+        '''Initialize object with DNSPod account and options
 
-        :Parameters:
+        :param str login_email: Account Email address
+        :param str login_password: Account password
+        :param str lang: Error returning language. By default, ``LANG_EN`` is
+                         used, avaliable values: ``LANG_EN``, ``LANG_CN``
+        :param str api_url: API url, default: ``DEFAULT_API_URL``
         '''
         self.login_email = login_email
         self.login_password = login_password
         self.format = 'json'
-        self.lang = kwargs.get('lang', self.DEFAULT_LANG)
-        self.api_url = kwargs.get('api_url', self.DEFAULT_API_URL)
+        self.lang = lang
+        self.api_url = api_url
 
     def do_post(self, interface, **params):
         common_param = {

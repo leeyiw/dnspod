@@ -11,18 +11,27 @@ class Domain(object):
             setattr(self, k, v)
 
 class DomainAPI(object):
-    '''
-    DNSPod API start with 'Info.*'.
-    '''
+    '''DNSPod API start with ``Domain.*``.'''
 
     def __init__(self, api):
+        '''Initalize object with BaseAPI
+
+        :param api: Instance of `BaseAPI`
+        '''
         self._api = api
 
-    def info(self, **kwargs):
-        if kwargs.has_key('domain_id'):
-            r = self._api.do_post('Domain.Info', domain_id=kwargs['domain_id'])
-        elif kwargs.has_key('domain'):
-            r = self._api.do_post('Domain.Info', domain=kwargs['domain'])
+    def info(self, domain_id=None, domain=None):
+        '''Get information about specific domain.
+        
+        :param str domain_id: Domain ID
+        :param str domain: Domain
+        :return: Domain object
+        :rtype: object
+        '''
+        if domain_id != None:
+            r = self._api.do_post('Domain.Info', domain_id=domain_id)
+        elif domain != None:
+            r = self._api.do_post('Domain.Info', domain=domain)
         else:
             # TODO throw exception
             pass
