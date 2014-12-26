@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 
 class InfoAPI(object):
-    '''DNSPod API start with ``Info.*``.'''
+    '''DNSPod API start with **Info.\***.'''
 
     def __init__(self, api):
         '''Initalize object with BaseAPI

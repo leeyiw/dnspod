@@ -11,7 +11,7 @@ class Domain(object):
             setattr(self, k, v)
 
 class DomainAPI(object):
-    '''DNSPod API start with ``Domain.*``.'''
+    '''DNSPod API start with **Domain.\***.'''
 
     def __init__(self, api):
         '''Initalize object with BaseAPI
@@ -21,12 +21,14 @@ class DomainAPI(object):
         self._api = api
 
     def info(self, domain_id=None, domain=None):
-        '''Get information about specific domain.
+        '''Get information for a specific domain.
+
+        Specify a domain by either ``domain_id`` or ``domain``, if both are
+        specified, then ``domain_id`` is used.
         
         :param str domain_id: Domain ID
         :param str domain: Domain
         :return: Domain object
-        :rtype: object
         '''
         if domain_id != None:
             r = self._api.do_post('Domain.Info', domain_id=domain_id)

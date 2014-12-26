@@ -24,9 +24,7 @@ class Record(object):
             setattr(self, k, v)
 
 class RecordAPI(object):
-    '''
-    DNSPod API start with 'Info.*'.
-    '''
+    '''DNSPod API start with **Record.\***'.'''
 
     def __init__(self, api):
         self._api = api
