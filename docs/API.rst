@@ -11,22 +11,21 @@ find the corresponding Python API here.
 Class references
 ----------------
 
-.. autoclass:: dnspod.BaseAPI
+.. autoclass:: dnspod.base.BaseAPI
    :members:
-   :undoc-members:
    :special-members: __init__
 
-.. autoclass:: dnspod.InfoAPI
+.. autoclass:: dnspod.info.InfoAPI
    :members:
-   :undoc-members:
    :special-members: __init__
 
-.. autoclass:: dnspod.DomainAPI
+.. autoclass:: dnspod.domain.DomainAPI
    :members:
-   :undoc-members:
    :special-members: __init__
 
-.. autoclass:: dnspod.RecordAPI
+.. autoclass:: dnspod.record.RecordAPI
    :members:
-   :undoc-members:
    :special-members: __init__
+
+.. autoclass:: dnspod.record.Record
+   :members:

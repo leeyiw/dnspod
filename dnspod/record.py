@@ -2,13 +2,27 @@
 #-*- coding: utf-8 -*-
 
 class Record(object):
-    '''
-    DNSPod record
+    '''DNSPod record class.
+
+    A record has a property called **line**. Line is the ISP of the request's
+    source IP. User can set multiple records with same sub-domain and different
+    line, then DNSPod could generate different responses for requests which has
+    the same sub-domain and different line of source IP.
+
+    :ivar str id: ID of a record
+    :ivar str sub_domain: The sub-domain of the record's domain (e.g., **www** of **www.google.com**)
+    :ivar str record_type: DNS record type, such as TYPE_A, etc.
+    :ivar str record_line: Line of a record, such as LINE_DEFAULT, etc.
+    :ivar str value: Value of a record, an IP address (e.g., '8.8.8.8')
     '''
 
+    #: DNS record type *A*
     TYPE_A = 'A'
+    #: DNS record type *NS*
     TYPE_NS = 'NS'
 
+    #: Default line, DNSPod will use record with default line if user haven't
+    #: set any record which's line match with the request line
     LINE_DEFAULT = '默认'
 
     def __init__(self, dictionary):
@@ -24,14 +38,20 @@ class Record(object):
             setattr(self, k, v)
 
 class RecordAPI(object):
-    '''DNSPod API start with **Record.\***'.'''
+    '''DNSPod API start with **Record.\***'''
 
     def __init__(self, api):
+        '''Initalize object with BaseAPI
+
+        :param api: Instance of `BaseAPI`
+        '''
         self._api = api
 
     def list(self, domain_id):
-        '''
-        Get the record list of specfic domain
+        '''Get a list of records, for a specific domain
+
+        :param str domain_id: Domain ID
+        :return: list of records
         '''
         r = self._api.do_post('Record.List', domain_id=domain_id)
         record_list = []
@@ -41,8 +61,16 @@ class RecordAPI(object):
         return record_list
 
     def ddns(self, domain_id, record_id, sub_domain, record_line, value):
-        '''
-        Update record dynamically
+        '''Update record's value dynamically
+
+        If the ``value`` is different from the record's current value, then
+        perform a dynamic record update. Otherwise, nothing will be done.
+
+        :param str domain_id: Domain ID
+        :param str record_id: Record ID
+        :param str sub_domain: Sub domain of domain (e.g., **www** of **www.google.com**)
+        :param str record_line: Line of the record
+        :param str value: The record's value, an IP address
         '''
         record = self.info(domain_id, record_id)
         # If everything stay the same, no need to update
@@ -55,6 +83,12 @@ class RecordAPI(object):
                           record_line=record_line, value=value)
 
     def info(self, domain_id, record_id):
+        '''Get information for a specific record
+
+        :param str domain_id: Domain ID
+        :param str record_id: Record ID
+        :return: object
+        '''
         r = self._api.do_post('Record.Info', domain_id=domain_id,
                               record_id=record_id)
         return Record(r['record'])

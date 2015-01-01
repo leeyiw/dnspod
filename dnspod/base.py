@@ -4,14 +4,17 @@
 import requests
 
 class BaseAPI(object):
-    '''BaseAPI is used by every other API objects.
+    '''BaseAPI is used by every other API objects
 
     BaseAPI hold informations that will used by other API objects during every
     API operation.
     '''
 
+    #: English error returning language
     LANG_EN = 'en'
+    #: Chinese error returning language
     LANG_CN = 'cn'
+    #: API's default URL, usually won't change
     DEFAULT_API_URL = 'https://dnsapi.cn/'
 
     def __init__(self, login_email, login_password, lang=LANG_EN, api_url=DEFAULT_API_URL):
