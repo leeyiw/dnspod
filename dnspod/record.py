@@ -47,13 +47,18 @@ class RecordAPI(object):
         '''
         self._api = api
 
-    def list(self, domain_id):
+    def list(self, domain_id, sub_domain=None):
         '''Get a list of records, for a specific domain
 
         :param str domain_id: Domain ID
+        :param str sub_domain: Optional. Subdomain of domain
         :return: list of records
         '''
-        r = self._api.do_post('Record.List', domain_id=domain_id)
+        optional_args = {}
+        if sub_domain != None:
+            optional_args['sub_domain'] = sub_domain
+        r = self._api.do_post('Record.List', domain_id=domain_id,
+                              **optional_args)
         record_list = []
         for record in r['records']:
             record['domain_id'] = domain_id
