@@ -3,6 +3,8 @@
 
 import requests
 
+from .exceptions import DNSPodError
+
 class BaseAPI(object):
     '''BaseAPI is used by every other API objects
 
@@ -43,6 +45,5 @@ class BaseAPI(object):
         r = requests.post(self.api_url + interface, data=params)
         data = r.json()
         if data['status']['code'] != '1':
-            # TODO throw exception
-            pass
+            raise DNSPodError(data['status']['message'])
         return data

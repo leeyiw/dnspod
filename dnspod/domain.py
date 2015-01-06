@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
+from .exceptions import DNSPodError
+
 class Domain(object):
     '''
     DNSPod domain
@@ -35,6 +37,5 @@ class DomainAPI(object):
         elif domain != None:
             r = self._api.do_post('Domain.Info', domain=domain)
         else:
-            # TODO throw exception
-            pass
+            raise DNSPodError('Both domain_id and domain are not specificed')
         return Domain(r['domain'])
